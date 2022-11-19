@@ -7,10 +7,15 @@ import { useState } from 'react';
 const Product = props => {
 
   const [currentColor, setCurrentColor] = useState(props.colors[0]);
-  const [currentSize, setCurrentSize] = useState(props.sizes[0].name);
+  const [currentSize, setCurrentSize] = useState([props.sizes[0].name, props.sizes[0].additionalPrice]);
 
   const prepareColorName = color => {
     return(styles['color' + color[0].toUpperCase() + color.substr(1).toLowerCase()]);
+  };
+
+  // [IN PROGRESS] UTWÓRZ FUNKCJE GET PRICE DODAJACA DO CENY BAZOWEJ CENĘ WIĘKSZEGO ROZMIARU KOSZULKI
+  const getPrice = (currentSize) => {
+   return(currentSize.additionalPrice + props.basePrice);
   };
 
   return (
@@ -24,7 +29,7 @@ const Product = props => {
       <div>
         <header>
           <h2 className={styles.name}>{props.title}</h2>
-          <span className={styles.price}>Price: {props.basePrice}$</span>
+          <span className={styles.price}>Price: {getPrice(currentSize)}$</span>
         </header>
         <form>
           <div className={styles.sizes}>
