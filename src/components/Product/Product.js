@@ -9,7 +9,6 @@ const Product = props => {
   const [currentColor, setCurrentColor] = useState(props.colors[0]);
   const [currentSize, setCurrentSize] = useState(props.sizes[0]);
 
-  console.log(props.sizes);
   const getPrice = (currentSize) => { 
     return(currentSize.additionalPrice + props.basePrice);
   };
