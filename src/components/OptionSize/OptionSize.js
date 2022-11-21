@@ -2,8 +2,7 @@ import styles from '../ProductForm/ProductForm.module.scss';
 import shortid from 'shortid';
 import clsx from 'clsx';
 
-const OptionSize = props => {
-  return(
+const OptionSize = props => (
     <div className={styles.sizes}>
       <h3 className={styles.optionLabel}>Sizes</h3>
       <ul className={styles.choices}>
@@ -11,6 +10,5 @@ const OptionSize = props => {
       </ul>
     </div>
   );
-};
 
 export default OptionSize;
