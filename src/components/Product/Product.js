@@ -1,17 +1,17 @@
 import styles from './Product.module.scss';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 import ProductImage from '../ProductImage/ProductImage';
 import ProductForm from '../ProductForm/ProductForm';
+import shortid from 'shortid';
+import { useState } from 'react';
 
 const Product = props => {
-
   const [currentColor, setCurrentColor] = useState(props.colors[0]);
-  const [currentSize, setCurrentSize] = useState([props.sizes[0].name, props.sizes[0].additionalPrice]);
+  const [currentSize, setCurrentSize] = useState(props.sizes[0]);
 
-
-  const getPrice = (currentSize) => {
-   return(currentSize.additionalPrice + props.basePrice);
+  console.log(props.sizes);
+  const getPrice = (currentSize) => { 
+    return(currentSize.additionalPrice + props.basePrice);
   };
 
   const addToCart = (e) => {
@@ -26,18 +26,32 @@ const Product = props => {
 
   return (
     <article className={styles.product}>
-        <ProductImage name={props.name} alt={props.title} currentColor={currentColor} />
+        <ProductImage 
+          key={shortid()}
+          name={props.name} 
+          alt={props.title} 
+          currentColor={currentColor} 
+        />
       <div>
         <header>
           <h2 className={styles.name}>{props.title}</h2>
           <span className={styles.price}>Price: {getPrice(currentSize)}$</span>
         </header>
-        <ProductForm sizes={props.sizes} colors={props.colors} currentSize={currentSize} currentColor={currentColor} setCurrentSize={setCurrentSize} setCurrentColor={setCurrentColor} addToCart={addToCart} />
+        <ProductForm 
+          key={shortid()}
+          sizes={props.sizes}
+          colors={props.colors}
+          currentSize={currentSize}
+          currentColor={currentColor}
+          setCurrentSize={setCurrentSize}
+          setCurrentColor={setCurrentColor}
+          addToCart={addToCart}
+        />
       </div>
     </article>
   )
-
 };
+
 Product.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
@@ -46,4 +60,5 @@ Product.propTypes = {
   colors: PropTypes.array.isRequired,
   sizes: PropTypes.array.isRequired
 };
+
 export default Product;
